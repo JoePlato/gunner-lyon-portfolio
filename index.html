@@ -429,64 +429,68 @@
         }
         
         // Example 1: A deep-dive project with a gallery and code blocks
+       // Project Skill Tree Mobile App
         addProject({
-            title: "NFL Analytics Reporting Library",
-            tags: "Python, Pandas, Next Gen Stats",
-            shortDesc: "A modular professional-grade reporting tool designed to generate formatted football analytics reports.",
-            media: [
-                "https://placehold.co/600x400/3b82f6/white?text=Data+Visualization+1",
-                "https://placehold.co/600x400/0f172a/white?text=Scouting+Report+PDF"
+            title: "Project Skill Tree Mobile App [cite: 14, 15]",
+            tags: "TypeScript, React Native, Express JS, MongoDB [cite: 17]",
+            shortDesc: "Helped develop the front-end code for the Skill Tree mobile app. [cite: 15]",
+            detailedHTML: `
+                <p>Built the settings page from scratch on top of writing much of the code when a new user signs up for the app. [cite: 16] I taught myself the structure of typescript, react native, and express JS servers implementing MongoDB. [cite: 17] I would also schedule a good portion of the meetings during the early stages of development so we could stay on track. [cite: 18]</p>
+            `
+        });
+
+        // JMU Recruitment System Redesign
+        addProject({
+            title: "Redesigning JMU's Recruitment System",
+            tags: "Algorithms, Predictive Modeling",
+            shortDesc: "My team developed a prediction algorithm based on player measurements and times gotten from a variety of high school camps. [cite: 48]",
+             media: [
+                "Screenshot 2026-04-15 225247.png"
             ],
             detailedHTML: `
-                <p>This library extracts tracking data and parses it into clean, automated PDF reports for scouting evaluations.</p>
-                <p>Here is a snippet of the data extraction logic:</p>
-                <pre><code>import pandas as pd
-
-def clean_tracking_data(filepath):
-    df = pd.read_csv(filepath)
-    # Filter for relevant player movement
-    cleaned_df = df[df['speed'] > 15.0]
-    return cleaned_df</code></pre>
-                <p>The resulting outputs can be handed directly to coaching staff.</p>
-            `,
-            externalUrl: "https://github.com/yourlink"
-        });
-
-        // Example 2: A simple link out to an external site
-        addProject({
-            title: "JMU Football Roster Database",
-            tags: "SQL, Relational Databases",
-            shortDesc: "A structured database architecture developed to manage and query complex team roster data efficiently.",
-            externalUrl: "https://github.com/yourlink"
-        });
-
-        // Example 3: Deep dive with just code, no media
-        addProject({
-            title: "All-Conference Wikipedia Scraper",
-            tags: "Python, Wikipedia API",
-            shortDesc: "Automated scripts designed to extract, parse, and clean specific data points from conference-related Wikipedia pages.",
-            detailedHTML: `
-                <p>Utilizing the Wikipedia API to pull HTML tables and convert them into structured SQL databases.</p>
-                <pre><code>import requests
-from bs4 import BeautifulSoup
-
-url = "https://en.wikipedia.org/wiki/..."
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
-# Parsing logic goes here</code></pre>
+                <p>We then created a computer program where you can input these stats and it outputs whether you should look at the player or not. [cite: 49] We then presented it showcasing its 5 combined type 1 and type 2 errors out of 1000 simulated players. [cite: 50]</p>
             `
         });
 
-        // Example 4: A deep dive with no code, just academic text
+        // 2023-2024 NFL Draft Report
         addProject({
-            title: "Jazz History Annotated Bibliography",
-            tags: "Academic Research, Writing",
-            shortDesc: "A comprehensive research project detailing the cultural transition from 1930s swing to 1960s jazz.",
+            title: "2023-2024 NFL Draft Report",
+            tags: "Data Compilation, Reporting",
+            shortDesc: "I compiled 34 pages of NFL draft information and put it into a clean, readable format. [cite: 52]",
             detailedHTML: `
-                <p>This research involved compiling primary and secondary sources to track the impact of the Civil Rights Movement on the evolution of jazz music.</p>
+                <p>This was used to evaluate that Year's recruiting class and how well we do at producing draft level talent. [cite: 53] This was then given directly to the Head coach of the program. [cite: 54]</p>
             `
         });
 
+        // Squat Flexibility Analysis
+        addProject({
+            title: "Squat-Flexibility Analysis",
+            tags: "Video Analysis, Linear Algebra",
+            shortDesc: "I created a video analysis tool that takes a potential recruit and grades this flexibility. [cite: 56]",
+            detailedHTML: `
+                <p>This is done using dot products to get a variety of different angles in 3d space to gain deeper insight into how a player will fit into JMUs system. [cite: 56]</p>
+            `
+        });
+
+        // Econometrics Report for JMU Football
+        addProject({
+            title: "Econometrics Report for JMU Football",
+            tags: "Econometrics, Statistics",
+            shortDesc: "Me and my research partner developed a system to automatically filter out offensive players(excluding) oline that would work best for JMU's system. [cite: 57]",
+            detailedHTML: `
+                <p>I learned about the following; collinearity when testing multiple statistics as well as the Gauss-Markov assumptions. [cite: 58] This will be useful for checking if a set of data is fit to be analyzed with a normal distribution. [cite: 59]</p>
+            `
+        });
+
+        // First D1 Offer Tracker
+        addProject({
+            title: "First D1 Offer Tracker",
+            tags: "Algorithms, Data Scraping",
+            shortDesc: "I created a custom algorithm that scans on3/rivals and 247 sports for players who got their first d1 offer that week. [cite: 61]",
+            detailedHTML: `
+                <p>This allows our current staff to get to these up and coming players before any other teams manage to see them. [cite: 62]</p>
+            `
+        });
     </script>
 </body>
 </html>

@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gunner Lyon | Portfolio</title>
     <style>
+        /* Modal Popup Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        .modal-content-wrapper img, .modal-content-wrapper video {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
+        /* Make gallery items look clickable */
+        .gallery img, .gallery video {
+            cursor: zoom-in;
+        }
         :root {
             --primary-color: #3b82f6; 
             --primary-glow: rgba(59, 130, 246, 0.3);
@@ -367,8 +414,45 @@
             </div>
         </div>
     </template>
-
+    <div id="media-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content-wrapper"></div>
+    </div>
     <script>
+        // Modal Logic
+        const modal = document.getElementById("media-modal");
+        const modalContentWrapper = document.querySelector('.modal-content-wrapper');
+        const closeModal = document.querySelector('.close-modal');
+
+        function openModal(mediaSrc, isVideo) {
+            modalContentWrapper.innerHTML = ''; // Clear old content
+            let expandedMedia = document.createElement(isVideo ? 'video' : 'img');
+            expandedMedia.src = mediaSrc;
+            
+            if (isVideo) {
+                expandedMedia.controls = true;
+                expandedMedia.autoplay = true;
+            }
+            
+            modalContentWrapper.appendChild(expandedMedia);
+            modal.style.display = "block";
+        }
+
+        // Close the modal when clicking the "X"
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+            modalContentWrapper.innerHTML = ''; // Clears the HTML to stop background video playback
+        }
+
+        // Close the modal when clicking anywhere in the background
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                modalContentWrapper.innerHTML = '';
+            }
+        }
+
+        // Project Component Logic
         function addProject(config) {
             const template = document.getElementById('project-template');
             const container = document.getElementById('project-container');
@@ -393,12 +477,22 @@
                     const isVideo = url.match(/\.(mp4|webm|ogg)$/i);
                     let mediaElement = document.createElement(isVideo ? 'video' : 'img');
                     mediaElement.src = url;
+                    
                     if (isVideo) {
                         mediaElement.controls = true;
                         mediaElement.muted = true;
+                        mediaElement.autoplay = true; // Forces the video to play
+                        mediaElement.loop = true;     // Loops the video infinitely
+                        mediaElement.playsInline = true; // Helps performance on mobile devices
                     } else {
                         mediaElement.alt = "Project media";
                     }
+
+                    // Make the image or video open the modal when clicked
+                    mediaElement.addEventListener('click', () => {
+                        openModal(url, isVideo);
+                    });
+
                     gallery.appendChild(mediaElement);
                 });
             } else {
@@ -427,9 +521,8 @@
 
             container.appendChild(clone);
         }
-        
-        // Example 1: A deep-dive project with a gallery and code blocks
-       // Project Skill Tree Mobile App
+
+        // --- YOU CAN PASTE YOUR addProject EXAMPLES HERE ---
         addProject({
             title: "Project Skill Tree Mobile App [cite: 14, 15]",
             tags: "TypeScript, React Native, Express JS, MongoDB [cite: 17]",
@@ -444,7 +537,7 @@
             title: "Redesigning JMU's Recruitment System",
             tags: "Algorithms, Predictive Modeling",
             shortDesc: "My team developed a prediction algorithm based on player measurements and times gotten from a variety of high school camps. [cite: 48]",
-             media: [
+            media: [
                 "Screenshot 2026-04-15 225247.png"
             ],
             detailedHTML: `
@@ -467,20 +560,14 @@
             title: "Squat-Flexibility Analysis",
             tags: "Video Analysis, Linear Algebra",
             shortDesc: "I created a video analysis tool that takes a potential recruit and grades this flexibility. [cite: 56]",
+            media: [
+                "GradedVideo.mp4"
+            ],
             detailedHTML: `
                 <p>This is done using dot products to get a variety of different angles in 3d space to gain deeper insight into how a player will fit into JMUs system. [cite: 56]</p>
             `
         });
 
-        // Econometrics Report for JMU Football
-        addProject({
-            title: "Econometrics Report for JMU Football",
-            tags: "Econometrics, Statistics",
-            shortDesc: "Me and my research partner developed a system to automatically filter out offensive players(excluding) oline that would work best for JMU's system. [cite: 57]",
-            detailedHTML: `
-                <p>I learned about the following; collinearity when testing multiple statistics as well as the Gauss-Markov assumptions. [cite: 58] This will be useful for checking if a set of data is fit to be analyzed with a normal distribution. [cite: 59]</p>
-            `
-        });
 
         // First D1 Offer Tracker
         addProject({
@@ -491,6 +578,7 @@
                 <p>This allows our current staff to get to these up and coming players before any other teams manage to see them. [cite: 62]</p>
             `
         });
+        
     </script>
 </body>
 </html>
